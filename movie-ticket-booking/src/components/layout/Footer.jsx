@@ -1,9 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap"
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react"
 
-const Footer = () => {
+const Footer = ({ sidebarOpen }) => {
   return (
-    <footer className="footer-custom">
+    <footer className={`footer-custom ${sidebarOpen ? "sidebar-open" : "sidebar-closed"}`}>
       <Container>
         <Row>
           <Col md={3} className="mb-4">
@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="d-flex gap-3">
               <Facebook size={20} className="text-light" style={{ cursor: "pointer" }} />
               <Twitter size={20} className="text-light" style={{ cursor: "pointer" }} />
-              <Instagram size={20} className="text-light" style={{ cursor: "pointer" }}  />
+              <Instagram size={20} className="text-light" style={{ cursor: "pointer" }} />
               <Youtube size={20} className="text-light" style={{ cursor: "pointer" }} />
             </div>
           </Col>
@@ -119,9 +119,7 @@ const Footer = () => {
 
         <Row>
           <Col className="text-center">
-            <p className="text-light small mb-0">
-              © 2025 booKar. All rights reserved. | Made with ❤️ for movie lovers
-            </p>
+            <p className="text-light small mb-0">© 2025 booKar. All rights reserved. | Made with RD for movie lovers</p>
           </Col>
         </Row>
       </Container>
