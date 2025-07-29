@@ -14,7 +14,7 @@
   --auth-input-bg: #f1f5f9;
   --auth-input-border: #e2e8f0;
 }
-
+/* adding line for commit purpose */
 [data-theme="dark"] {
   --text-primary: #f9fafb;
   --text-secondary: #d1d5db;
