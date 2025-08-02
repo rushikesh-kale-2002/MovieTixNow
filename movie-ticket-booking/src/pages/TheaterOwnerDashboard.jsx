@@ -19,7 +19,7 @@ const TheaterOwnerDashboard = () => {
 
   if (user?.role !== "theater-owner") {
     return (
-      <Container className="py-5">
+      <Container className="py-5 page-with-navbar-padding">
         <div className="text-center">
           <h2>Access Denied</h2>
           <p>You don't have permission to access this page.</p>
@@ -80,7 +80,7 @@ const TheaterOwnerDashboard = () => {
   }
 
   return (
-    <Container fluid className="py-4">
+    <Container fluid className="py-4 page-with-navbar-padding">
       <Row>
         <Col md={2} className="mb-4">
           <Card>

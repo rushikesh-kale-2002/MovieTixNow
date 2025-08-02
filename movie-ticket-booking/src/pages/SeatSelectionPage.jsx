@@ -47,7 +47,7 @@ const SeatSelectionPage = () => {
 
   if (!movie) {
     return (
-      <Container className="py-5">
+      <Container className="py-5 page-with-navbar-padding">
         <div className="text-center">
           <h2>Movie not found</h2>
           <Button variant="primary" onClick={() => navigate("/")}>
@@ -90,12 +90,12 @@ const SeatSelectionPage = () => {
   }
 
   return (
-    <Container className="py-4">
+    <Container className="py-4 page-with-navbar-padding">
       <Row className="mb-4">
         <Col>
           <div className="d-flex align-items-center mb-3">
             <img
-              src={movie.poster || "/placeholder.svg"}
+              src={movie.poster || "/placeholder.svg?height=80&width=60&query=movie+poster"}
               alt={movie.title}
               style={{ width: "60px", height: "80px", objectFit: "cover" }}
               className="rounded me-3"

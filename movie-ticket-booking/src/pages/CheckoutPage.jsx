@@ -26,7 +26,7 @@ const CheckoutPage = () => {
 
   if (!user) {
     return (
-      <Container className="py-5">
+      <Container className="py-5 page-with-navbar-padding">
         <Alert variant="warning" className="text-center">
           <h4>Please login to continue</h4>
           <p>You need to be logged in to complete your booking.</p>
@@ -40,7 +40,7 @@ const CheckoutPage = () => {
 
   if (selectedSeats.length === 0) {
     return (
-      <Container className="py-5">
+      <Container className="py-5 page-with-navbar-padding">
         <Alert variant="info" className="text-center">
           <h4>No seats selected</h4>
           <p>Please select seats to proceed with booking.</p>
@@ -82,7 +82,7 @@ const CheckoutPage = () => {
 
   if (bookingComplete) {
     return (
-      <Container className="py-5">
+      <Container className="py-5 page-with-navbar-padding">
         <Row className="justify-content-center">
           <Col md={6}>
             <Card className="text-center">
@@ -109,7 +109,7 @@ const CheckoutPage = () => {
   }
 
   return (
-    <Container className="py-4">
+    <Container className="py-4 page-with-navbar-padding">
       <Row>
         <Col lg={8} className="mb-4">
           <Card>
@@ -120,7 +120,7 @@ const CheckoutPage = () => {
               {/* Payment Method Selection */}
               <div className="mb-4">
                 <h6 className="mb-3">Select Payment Method</h6>
-                <div className="d-flex gap-3 mb-3">
+                <div className="d-flex gap-3 mb-3 flex-wrap">
                   <Button
                     variant={paymentMethod === "card" ? "primary" : "outline-primary"}
                     onClick={() => setPaymentMethod("card")}

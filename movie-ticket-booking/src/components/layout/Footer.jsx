@@ -7,7 +7,7 @@ const Footer = ({ sidebarOpen }) => {
       <Container>
         <Row>
           <Col md={3} className="mb-4">
-            <h5 className="text-danger fw-bold mb-3">booKar</h5>
+            <h5 className="text-danger fw-bold mb-3">MovieTixNow</h5>
             <p className="text-light">
               Your ultimate destination for movie ticket booking. Experience cinema like never before.
             </p>
@@ -119,7 +119,7 @@ const Footer = ({ sidebarOpen }) => {
 
         <Row>
           <Col className="text-center">
-            <p className="text-light small mb-0">© 2025 booKar. All rights reserved. | Made with RD for movie lovers</p>
+            <p className="text-light small mb-0">© 2025 MovieTixNow. All rights reserved. | Made with RD for movie lovers</p>
           </Col>
         </Row>
       </Container>

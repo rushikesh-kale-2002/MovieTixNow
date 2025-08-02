@@ -1,4 +1,5 @@
 "use client"
+
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap"
 import { useParams, useNavigate } from "react-router-dom"
 import { Play, Star, Clock, Users } from "lucide-react"
@@ -31,11 +32,11 @@ const MovieDetailsPage = () => {
   ]
 
   return (
-    <Container className="py-4">
+    <Container className="movie-details-page py-4 page-with-navbar-padding">
       <Row>
         <Col lg={4} className="mb-4">
-          <Card>
-            <Card.Img variant="top" src={movie.poster} />
+          <Card className="movie-poster-card">
+            <Card.Img variant="top" src={movie.poster || "/placeholder.svg?height=600&width=400&query=movie+poster"} />
             <Card.Body className="text-center">
               <Button
                 variant="primary"
@@ -54,54 +55,53 @@ const MovieDetailsPage = () => {
         </Col>
 
         <Col lg={8}>
-          <div className="mb-4">
-            <h1 className="display-5 fw-bold mb-3">{movie.title}</h1>
+          <div className="movie-info">
+            <h1 className="movie-title">{movie.title}</h1>
 
-            <div className="d-flex flex-wrap gap-3 mb-4">
-              <Badge bg="warning" text="dark" className="fs-6">
+            <div className="movie-badges">
+              <Badge bg="warning" text="dark" className="rating-badge">
                 <Star size={16} className="me-1" />
                 {movie.rating}/10
               </Badge>
-              <Badge bg="info" className="fs-6">
+              <Badge bg="info" className="duration-badge">
                 <Clock size={16} className="me-1" />
                 {movie.duration}
               </Badge>
-              <Badge bg="success" className="fs-6">
+              <Badge bg="success" className="language-badge">
                 {movie.language}
               </Badge>
             </div>
 
-            <div className="mb-4">
-              <h6 className="text-muted mb-2">Genres</h6>
-              <div className="d-flex flex-wrap gap-2">
+            <div className="movie-genres">
+              <h6 className="section-subtitle">Genres</h6>
+              <div className="genre-tags">
                 {movie.genre.map((g, index) => (
-                  <Badge key={index} bg="light" text="dark">
+                  <Badge key={index} bg="light" text="dark" className="me-2 mb-2">
                     {g}
                   </Badge>
                 ))}
               </div>
             </div>
 
-            <div className="mb-4">
-              <h6 className="text-muted mb-2">Synopsis</h6>
-              <p className="lead">{movie.description}</p>
+            <div className="movie-synopsis">
+              <h6 className="section-subtitle">Synopsis</h6>
+              <p className="synopsis-text">{movie.description}</p>
             </div>
 
-            <div className="mb-4">
-              <h6 className="text-muted mb-2">Cast</h6>
+            <div className="movie-cast">
+              <h6 className="section-subtitle">Cast</h6>
               <Row>
                 {movie.cast.map((actor, index) => (
                   <Col key={index} sm={6} md={4} className="mb-3">
-                    <div className="d-flex align-items-center">
+                    <div className="cast-member">
                       <img
                         src={`/placeholder.svg?height=50&width=50&query=${actor.replace(" ", "+")}`}
                         alt={actor}
-                        className="rounded-circle me-3"
-                        style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                        className="cast-avatar"
                       />
-                      <div>
-                        <div className="fw-semibold">{actor}</div>
-                        <small className="text-muted">Actor</small>
+                      <div className="cast-info">
+                        <div className="cast-name">{actor}</div>
+                        <small className="cast-role">Actor</small>
                       </div>
                     </div>
                   </Col>
@@ -113,9 +113,9 @@ const MovieDetailsPage = () => {
       </Row>
 
       {/* Reviews Section */}
-      <Row className="mt-5">
+      <Row className="reviews-section">
         <Col>
-          <h3 className="mb-4">
+          <h3 className="reviews-title">
             <Users size={24} className="me-2" />
             User Reviews
           </h3>
@@ -123,11 +123,11 @@ const MovieDetailsPage = () => {
           <Row>
             {reviews.map((review) => (
               <Col key={review.id} md={6} lg={4} className="mb-4">
-                <Card>
+                <Card className="review-card">
                   <Card.Body>
-                    <div className="d-flex justify-content-between align-items-center mb-2">
-                      <h6 className="mb-0">{review.user}</h6>
-                      <div>
+                    <div className="review-header">
+                      <h6 className="reviewer-name">{review.user}</h6>
+                      <div className="review-rating">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
@@ -138,7 +138,7 @@ const MovieDetailsPage = () => {
                         ))}
                       </div>
                     </div>
-                    <p className="small text-muted mb-0">{review.comment}</p>
+                    <p className="review-comment">{review.comment}</p>
                   </Card.Body>
                 </Card>
               </Col>

@@ -35,7 +35,7 @@ const CustomNavbar = ({ sidebarOpen, setSidebarOpen }) => {
       <Container>
         {/* Left side: Filter Toggle + Brand */}
         <div className="d-flex align-items-center" style={{ width: '100%' }}>
-          {/* Hamburger Toggle Button - image style */}
+          {/* Hamburger Toggle Button - show for all devices */}
           <Button
             variant="light"
             size="lg"
@@ -82,7 +82,7 @@ const CustomNavbar = ({ sidebarOpen, setSidebarOpen }) => {
               alignItems: 'center' 
             }}>
             <img src="/logo.jpeg" alt="Logo" height="30" className="me-2" style={{ borderRadius: "50%", boxShadow: 'none' }} />
-            booKar.com
+            MovieTixNow
           </Navbar.Brand>
           {/* Search bar next to brand */}
           <Form className="d-flex" style={{ maxWidth: "500px", width: "100%" }}>
@@ -106,9 +106,7 @@ const CustomNavbar = ({ sidebarOpen, setSidebarOpen }) => {
           <Button variant="outline-secondary" size="sm" onClick={toggleTheme} className="me-2">
             {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
           </Button>
-          <Navbar.Toggle aria-controls="basic-navbar-nav">
-            <Menu size={20} />
-          </Navbar.Toggle>
+          {/* Removed Navbar.Toggle with Menu icon to eliminate extra button on mobile */}
         </div>
 
         <Navbar.Collapse id="basic-navbar-nav">

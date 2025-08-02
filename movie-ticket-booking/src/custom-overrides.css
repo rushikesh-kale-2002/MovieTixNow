@@ -1,0 +1,50 @@
+/* Make select options color match input text in both modes */
+/* Make select options color match input placeholder in both modes */
+.simple-form-input.simple-form-select option {
+  color: #94a3b8 !important;
+  background: var(--auth-input-bg) !important;
+}
+[data-theme="dark"] .simple-form-input.simple-form-select option {
+  color: #94a3b8 !important;
+  background: var(--auth-input-bg) !important;
+}
+/* Match role select with other form input styles in both modes */
+
+/* Make role select color match email input */
+.simple-form-input.simple-form-select {
+  background-color: var(--auth-input-bg) !important;
+  border: 1px solid var(--auth-input-border) !important;
+  color: #1a1a1a !important;
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .simple-form-input.simple-form-select {
+  background-color: var(--auth-input-bg) !important;
+  border: 1px solid var(--auth-input-border) !important;
+  color: #f9fafb !important;
+}
+/* Make the role select text white in dark mode */
+[data-theme="dark"] .simple-form-input.simple-form-select {
+  color: #fff !important;
+}
+/* Custom overrides for HomePage movie card text visibility in dark mode */
+[data-theme="dark"] .movie-card .text-muted,
+[data-theme="dark"] .movie-card .small,
+[data-theme="dark"] .movie-card .Card-Title,
+[data-theme="dark"] .movie-card .card-title,
+[data-theme="dark"] .movie-card .card-body,
+[data-theme="dark"] .movie-card .badge.bg-light {
+  color: #f9fafb !important;
+  background: none !important;
+}
+[data-theme="dark"] .movie-card .badge.bg-light {
+  background: #374151 !important;
+  color: #f9fafb !important;
+  border: 1px solid #555 !important;
+}
+[data-theme="dark"] .movie-card .card-title {
+  color: #f9fafb !important;
+}
+[data-theme="dark"] .movie-card .small {
+  color: #d1d5db !important;
+}

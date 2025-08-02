@@ -17,7 +17,7 @@ const ShowSelectionPage = () => {
 
   if (!movie) {
     return (
-      <Container className="py-5">
+      <Container className="py-5 page-with-navbar-padding">
         <div className="text-center">
           <h2>Movie not found</h2>
           <Button variant="primary" onClick={() => navigate("/")}>
@@ -76,7 +76,7 @@ const ShowSelectionPage = () => {
   }
 
   return (
-    <Container className="py-4">
+    <Container className="py-4 page-with-navbar-padding">
       <Row className="mb-4">
         <Col>
           <div className="d-flex align-items-center mb-3">

@@ -1,3 +1,11 @@
+/* Extra gap between navbar and homepage */
+.homepage-main-content {
+  margin-top: 2.5rem;
+}
+/* Utility: Extra top padding for non-home pages to prevent navbar overlap */
+.page-with-navbar-padding {
+  padding-top: 90px !important;
+}
 :root {
   --primary-color: #dc2626;
   --secondary-color: #1f2937;
@@ -46,7 +54,12 @@ body {
 
 .main-content {
   flex: 1;
-  padding-top: 0;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add padding only for non-home pages */
+.main-content.with-navbar-padding {
+  padding-top: 48px;
 }
 
 /* Simple Auth Modal Styles */

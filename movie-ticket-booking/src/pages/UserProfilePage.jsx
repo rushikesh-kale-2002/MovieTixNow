@@ -19,7 +19,7 @@ const UserProfilePage = () => {
 
   if (!user) {
     return (
-      <Container className="py-5">
+      <Container className="py-5 page-with-navbar-padding">
         <Alert variant="warning" className="text-center">
           <h4>Please login to view your profile</h4>
         </Alert>
@@ -34,7 +34,7 @@ const UserProfilePage = () => {
   }
 
   return (
-    <Container className="py-4">
+    <Container className="py-4 page-with-navbar-padding">
       <Row>
         <Col md={3} className="mb-4">
           <Card>
