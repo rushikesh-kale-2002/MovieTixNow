@@ -1,0 +1,113 @@
+:root {
+  --ticket-bg-color: #f5deb3;  /* background color of card */
+  --circle-cutout-color: #ffffff; /* circle color for light theme */
+  --text-color: #111;
+}
+
+body.dark-theme {
+  --ticket-bg-color: #222;  /* example dark bg */
+  --circle-cutout-color: #111827; /* circle color for dark theme */
+  --text-color: #eee;
+}
+
+
+.ticket-card {
+  max-width: 400px;
+  margin: 30px auto;
+  border: 2px solid #333;
+  border-radius: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold; 
+  position: relative;
+  overflow: hidden;
+  color: #111;
+}
+.ticket-card {
+  position: relative;
+  /* ... your existing styles ... */
+ /* background: #f5deb3 !important;*/
+  font-weight: bold;
+  /* keep overflow visible so cutouts show outside */
+  overflow: visible;
+}
+
+/* Left circular cutout */
+.ticket-card::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -15px;  /* slightly outside left edge */
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+/* Right circular cutout */
+.ticket-card::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -15px; /* slightly outside right edge */
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.perforated-line {
+  height: 2px;
+  margin: 0 15px;
+  border-top: 2px dashed #070606;
+  position: relative;
+  top: 0;
+  z-index: 1;
+}
+
+.ticket-body-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+}
+
+.ticket-row {
+  display: flex;
+  justify-content: center; 
+  gap: 10px;               
+  margin-bottom: 12px;
+  width: 100%;
+  max-width: 320px;        
+  word-break: break-word;  
+}
+
+.ticket-label {
+  font-weight: bold;
+  color: #555;
+  width: 120px;
+  text-align: right;
+}
+
+.ticket-value {
+  font-weight: bold;
+  color: #111;
+  text-align: left;
+  flex: 1; 
+}
+
+.button-container {
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+}
+.ticket-card {
+  color: var(--text-color);
+}
+
+.ticket-card::before,
+.ticket-card::after {
+  background: var(--circle-cutout-color);
+  /* remove border ring */
+  box-shadow: none;
+}
