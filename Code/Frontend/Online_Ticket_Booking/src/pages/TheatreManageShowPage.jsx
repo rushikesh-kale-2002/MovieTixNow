@@ -170,7 +170,7 @@ const TheatreManageShowsPage = () => {
               <tr key={show.id}>
                 <td><div className="fw-bold">{show.movieTitle}</div></td>
                 <td>{show.theaterName}</td>
-                <td><Badge bg="secondary">Screen {show.screenNumber}</Badge></td>
+                <td><Badge bg="secondary">{show.screenNumber}</Badge></td>
                 <td>
                   <div className="small">
                     <div className="fw-bold">{formatDate(show.showDate)}</div>

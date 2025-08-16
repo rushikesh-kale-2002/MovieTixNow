@@ -8,11 +8,16 @@ const ManageTheaters = () => {
   const [showModal, setShowModal] = useState(false)
   const [theaterToDelete, setTheaterToDelete] = useState(null)
   const [loading, setLoading] = useState(false)
+  const token = localStorage.getItem("token")
 
   useEffect(() => {
     const fetchAll = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/theaters/admin/all")
+        const res = await axios.get("http://localhost:8080/api/theaters/admin/all",{
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
         setTheaters(res.data)
       } catch (error) {
         console.error("Failed to fetch theaters", error)
@@ -23,7 +28,11 @@ const ManageTheaters = () => {
 
   const handleStatusChange = async (id, status) => {
     try {
-      await axios.put(`http://localhost:8080/api/theaters/${id}/status/${status.toUpperCase()}`)
+      await axios.put(`http://localhost:8080/api/theaters/${id}/status/${status.toUpperCase()}`,{
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
       setTheaters((prev) =>
         prev.map((t) => (t.theaterId === id ? { ...t, status: status.toUpperCase() } : t))
       )
@@ -42,7 +51,11 @@ const ManageTheaters = () => {
 
     setLoading(true)
     try {
-      await axios.delete(`http://localhost:8080/api/theaters/admin/${theaterToDelete.theaterId}`)
+      await axios.delete(`http://localhost:8080/api/theaters/admin/${theaterToDelete.theaterId}`,{
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
       setTheaters((prev) => prev.filter((t) => t.theaterId !== theaterToDelete.theaterId))
       setTheaterToDelete(null)
       setShowModal(false)

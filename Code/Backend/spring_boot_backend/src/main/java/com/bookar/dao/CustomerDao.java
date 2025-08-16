@@ -15,7 +15,8 @@ public interface CustomerDao extends JpaRepository<User, Long> {
 	boolean existsByEmail(String email);
 	@Query(value = """
 	        SELECT 
-	            r.reservation_id AS bookingId,
+	            b.booking_id AS id,
+	            r.reservation_id AS reservationId,
 	            m.title AS movieTitle,
 	            t.theater_name AS theaterName,
 	            s.screen_no AS screenNumber,
@@ -27,6 +28,7 @@ public interface CustomerDao extends JpaRepository<User, Long> {
 	            r.total_amount AS totalAmount,
 	            r.reservation_status AS status
 	        FROM reservations r
+	        JOIN bookings b ON b.reservation_id = r.reservation_id
 	        JOIN shows sh ON r.show_id = sh.show_id
 	        JOIN movies m ON sh.movie_id = m.movie_id
 	        JOIN screens s ON sh.screen_id = s.screen_id

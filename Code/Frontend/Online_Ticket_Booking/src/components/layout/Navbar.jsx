@@ -22,20 +22,7 @@ const CustomNavbar = () => {
   }
 
 
-  const handleProfileClick = () => {
-    
-    if (user) {
-      if (user.role === "admin") {
-        navigate("/admin")
-      } else if (user.role === "theater-owner") {
-        navigate("/theater-owner")
-      } else {
-        navigate("/profile")
-      }
-    } else {
-      setShowLoginModal(true)
-    }
-  }
+  
 
   return (
     <Navbar expand="lg" className="navbar-custom fixed-top" variant={theme}>
@@ -49,7 +36,6 @@ const CustomNavbar = () => {
         //style={{ borderRadius: '' }} // optional for circular logo
         />
         </Navbar.Brand>
-
 
 
         <div className="d-flex align-items-center d-lg-none">
@@ -113,7 +99,7 @@ const CustomNavbar = () => {
 
             {user ? (
               <div className="dropdown">
-                <Button variant="outline-primary" className="d-flex align-items-center" onClick={handleProfileClick}>
+                <Button variant="outline-primary" className="d-flex align-items-center" onClick={() => navigate("/profile")}>
                   <User size={18} className="me-2" />
                   {user.firstname}
                 </Button>

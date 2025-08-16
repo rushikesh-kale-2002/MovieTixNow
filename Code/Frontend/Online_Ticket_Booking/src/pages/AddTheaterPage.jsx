@@ -39,8 +39,12 @@ const AddTheaterPage = () => {
         screenCount: formData.screens,
         ownerId: ownerId,
       }
-
-      const res = await axios.post("http://localhost:8080/api/theaters/add", dto)
+      const token = localStorage.getItem("token")
+      const res = await axios.post("http://localhost:8080/api/theaters/add", dto,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       setAlert({ type: "success", message: res.data.message })
 
       // Redirect after 2 seconds

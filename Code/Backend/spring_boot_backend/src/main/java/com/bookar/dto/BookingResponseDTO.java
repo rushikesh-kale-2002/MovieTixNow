@@ -17,6 +17,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class BookingResponseDTO {
     private Long id;
+    private Long reservationId;
     private String movieTitle;
     private String theaterName;
     private String screenNumber;

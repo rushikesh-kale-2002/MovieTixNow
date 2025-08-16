@@ -65,7 +65,9 @@ function UserProfilePage() {
                         pincode: userData.address.pincode
                     }
                 })
-                fetchBookings(userData.id)
+                if(userData.role === "ROLE_CUSTOMER"){
+                    fetchBookings(userData.id)
+                }
             } else {
                 toast.error("Failed to Load the User")
             }
@@ -285,7 +287,7 @@ function UserProfilePage() {
                                                                 {booking.status}
                                                             </Badge>
                                                             <div>
-                                                                <Button variant="outline-primary" size="sm">
+                                                                <Button variant="outline-primary" size="sm" onClick={() => navigate(`/ticket/${booking.id}`)}>
                                                                     Download Ticket
                                                                 </Button>
                                                             </div>

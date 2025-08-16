@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { config } from './config'
-
-
+import { toast } from 'react-toastify'
 export async function loginUser(email, password) {
     try {
         const url = `${config.serverUrl}/user/signin`
@@ -29,7 +28,7 @@ export async function registerUser(firstname, lastname, email, password, mobile_
 }
 
 export async function fetchUserDetails() {
-    const url = `${config.serverUrl}/user/signup`
+    const url = `${config.serverUrl}/user/profile`
     const token = localStorage.getItem("token");
     if (!token) {
         console.warn("No token found in session storage");
@@ -39,7 +38,7 @@ export async function fetchUserDetails() {
         const response = await axios.get(`${config.serverUrl}/user/profile`, {
             headers: {
                 Authorization: `Bearer ${token}`,
-            },
+            }
         });
         const userData = response.data;
         // Store user data in session storage
@@ -59,7 +58,11 @@ export async function updateUser(id, firstname, lastname, email, password, mobil
         const body = {
             id, firstname, lastname, email, password, mobile_no, gender, role, dob, address: { addr_line1, addr_line2, town_city, state, pincode, district }
         }
-        const result = await axios.put(url, body)
+        const result = await axios.put(url, body, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         return result
     } catch (error) {
         return error.response

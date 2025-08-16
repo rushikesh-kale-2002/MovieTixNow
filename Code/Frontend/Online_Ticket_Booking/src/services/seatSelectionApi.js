@@ -25,6 +25,11 @@ export const fetchSeatsForShow = async (showId, theaterId) => {
 
 
 export const reserveSeats = async (payload) => {
-  const res = await axios.post(`${BASE}/seatselection/reserve`, payload);
+  const token = localStorage.getItem("token")
+  const res = await axios.post(`${BASE}/seatselection/reserve`, payload,{
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
   return res.data;
 };

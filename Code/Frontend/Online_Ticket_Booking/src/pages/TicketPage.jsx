@@ -12,11 +12,16 @@ const TicketPage = () => {
   const [ticket, setTicket] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
+  const token = localStorage.getItem("token")
 
   useEffect(() => {
     const fetchTicket = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/bookings/${bookingId}`)
+        const response = await axios.get(`http://localhost:8080/api/bookings/${bookingId}`,{
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
         setTicket(response.data)
       } catch (err) {
         console.error("Error fetching ticket:", err)

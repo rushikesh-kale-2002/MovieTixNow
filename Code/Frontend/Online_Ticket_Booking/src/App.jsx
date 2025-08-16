@@ -31,52 +31,71 @@ import ManageUsers from "./pages/ManageUsers";
 import CheckoutPage from "./pages/CheckoutPage";
 import { useLocation } from "react-router-dom";
 import TicketPage from "./pages/TicketPage";
+import RequireAuth from "./routes/RequireAuth";
+import RequireRole from "./routes/RequireRole";
 
 function App() {
 
   const isAdminRoute = useLocation().pathname.startsWith("/admin");
   return (
-     <ThemeProvider>
+    <ThemeProvider>
       <AuthProvider>
         <BookingProvider>
           {/* <Router> */}
-            <div className="app">
-              {!isAdminRoute && <Navbar/> }
-              <main className="main-content">
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/movie/:id" element={<MovieDetailsPage />} />
-                  <Route path="/movie/:id/seats" element={<SeatSelectionPage />} />
-                  <Route path="/movie/:id/shows" element={<ShowSelectionPage />} />
-                  <Route path="/owner/theaters/:theaterId/add-show" element={<AddShowPage />} />
-                  <Route path="/signin" element={<Login />} />
-                  <Route path="/signup" element={<Register />} />
+          <div className="app">
+            {!isAdminRoute && <Navbar />}
+            <main className="main-content">
+              <Routes>
+                {/* Public */}
+                <Route path="/" element={<HomePage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/movie/:id" element={<MovieDetailsPage />} />
+                <Route path="/movie/:id/shows" element={<ShowSelectionPage />} />
+                <Route path="/movie/:id/seats" element={<SeatSelectionPage />} />
+                <Route path="/signin" element={<Login />} />
+                <Route path="/signup" element={<Register />} />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/terms-of-use" element={<TermsOfUse />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/about-us" element={<AboutUs />} />
+                
+                <Route element={<RequireRole roles={['ROLE_CUSTOMER', 'ROLE_THEATRE_OWNER', 'ROLE_ADMIN']} />}>
                   <Route path="/profile" element={<UserProfilePage />} />
-                  <Route path="/checkout" element={<CheckoutPage />} />
-                  <Route path="/ticket/:bookingId" element={<TicketPage />} />
-                  <Route path="/search" element={<SearchPage />} />
-                  <Route path="/owner/add-theater" element={<AddTheaterPage />} />
-                  <Route path="/owner/theaters" element={<TheaterListPage />} />
-                  <Route path="/owner/:theaterId/layout" element={<LayoutPage />} />
-                  <Route path="/dashboard/shows" element={<TheatreManageShowsPage />} />
-                  <Route path="/dashboard" element={<TheatreOwnerDashboard />}></Route>
-                  {/* Footer pages */}
-                  <Route path="/contact-us" element={<ContactUs />} />
-                  <Route path="/terms-of-use" element={<TermsOfUse />} />
-                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                  <Route path="/about-us" element={<AboutUs />} />
-                  <Route path="/admin/*" element={<Layout />} >
-                    <Route path="" element={<AdminHomepage />} />
-                    <Route path="movies" element={<ManageMovies />} />
-                    <Route path="users" element={<ManageUsers />} />
-                    <Route path="theaters" element={<ManageTheaters />} />
+                </Route>
 
+                {/* Authenticated (all signed-in users) */}
+                <Route element={<RequireAuth />}>
+                  {/* Customer-only */}
+                  <Route element={<RequireRole roles={['ROLE_CUSTOMER']} />}>
+                    <Route path="/checkout" element={<CheckoutPage />} />
+                    <Route path="/ticket/:bookingId" element={<TicketPage />} />
                   </Route>
-                </Routes>
-              </main>
-               {!isAdminRoute && <Footer/> }
-              <ToastContainer />
-            </div>
+
+                  {/* Theatre Owner-only */}
+                  <Route element={<RequireRole roles={['ROLE_THEATRE_OWNER']} />}>
+                    <Route path="/owner/add-theater" element={<AddTheaterPage />} />
+                    <Route path="/owner/theaters" element={<TheaterListPage />} />
+                    <Route path="/owner/theaters/:theaterId/add-show" element={<AddShowPage />} />
+                    <Route path="/owner/:theaterId/layout" element={<LayoutPage />} />
+                    <Route path="/dashboard" element={<TheatreOwnerDashboard />} />
+                    <Route path="/dashboard/shows" element={<TheatreManageShowsPage />} />
+                  </Route>
+
+                  {/* Admin-only (entire admin shell) */}
+                  <Route element={<RequireRole roles={['ROLE_ADMIN']} />}>
+                      <Route path="/admin/*" element={<Layout />}>
+                      <Route path="" element={<AdminHomepage />} />
+                      <Route path="movies" element={<ManageMovies />} />
+                      <Route path="users" element={<ManageUsers />} />
+                      <Route path="theaters" element={<ManageTheaters />} />
+                    </Route>
+                  </Route>
+                </Route>
+              </Routes>
+            </main>
+            {!isAdminRoute && <Footer />}
+            <ToastContainer />
+          </div>
           {/* </Router> */}
           {/* admin routes */}
           {/*  */}

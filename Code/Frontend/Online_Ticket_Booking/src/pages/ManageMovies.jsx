@@ -19,6 +19,7 @@ const ManageMovies = () => {
   const [movies, setMovies] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingMovie, setEditingMovie] = useState(null);
+  const token = localStorage.getItem("token")
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -44,7 +45,11 @@ const ManageMovies = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/admin/movies")
+      .get("http://localhost:8080/api/admin/movies",{
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
       .then((res) => setMovies(res.data))
       .catch((err) => console.error(err));
   }, []);

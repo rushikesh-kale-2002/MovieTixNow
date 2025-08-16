@@ -127,7 +127,7 @@ public class ShowServiceImpl implements ShowService {
     public void deleteShow(Long showId) {
         Show show = showDao.findById(showId)
             .orElseThrow(() -> new ResourceNotFoundException("Show not found with ID: " + showId));
-        showDao.delete(show);
+        show.setShowStatus(ShowStatus.EXPIRED);
     }
 
 	@Override

@@ -1,11 +1,15 @@
 import axios from "axios";
-
+const token = localStorage.getItem("token")
 const BASE_URL = "http://localhost:8080/api/admin"; 
 
 class DataService {
   // Dashboard
   getDashboardStats() {
-    return axios.get(`${BASE_URL}/dashboard-stats`);
+    return axios.get(`${BASE_URL}/dashboard-stats`,{
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
   }
 
    // 🔹 Movies
@@ -50,7 +54,11 @@ class DataService {
 
   // Users
   getUsers() {
-    return axios.get(`${BASE_URL}/users`);
+    return axios.get(`${BASE_URL}/users`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
   }
 
   toggleUserStatus(id) {

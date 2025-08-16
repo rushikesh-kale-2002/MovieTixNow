@@ -14,11 +14,16 @@ const CheckoutPage = () => {
   const [reservationDetails, setReservationDetails] = useState(null);
   const [amount, setAmount]= useState(0); 
   const{booking}= useBooking()
+  const token = localStorage.getItem("token")
   // Load reservation details on mount
   useEffect(() => {
     if (reservationId) {
       axios
-        .get(`http://localhost:8080/api/reservations/${reservationId}`)
+        .get(`http://localhost:8080/api/reservations/${reservationId}`,{
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
         .then((res) => {
           console.log("Reservation Details:", res.data);
           setReservationDetails(res.data);
@@ -58,7 +63,11 @@ const CheckoutPage = () => {
       // Call backend to create Razorpay order
       const orderRes = await axios.post("http://localhost:8080/api/payment/create-order", {
         reservationId: reservationDetails.reservationId,
-       // amount:reservationDetails.totalPayable  
+        // amount:reservationDetails.totalPayable  
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
       });
 
       const { amount,orderId, currency, user, bookingDetails } = orderRes.data;
@@ -80,7 +89,11 @@ const CheckoutPage = () => {
               razorpayOrderId: response.razorpay_order_id,
               razorpaySignature: response.razorpay_signature,
               reservationId,
-            });
+            }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
 
             const { bookingId } = verificationRes.data;
             navigate(`/ticket/${bookingId}`);
